@@ -20,8 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
   
+#  flutter_vlc_player_platform_interface:
+#    path: ../flutter_vlc_player_platform_interface
   flutter_vlc_player_platform_interface:
-    path: ../flutter_vlc_player_platform_interface
+    git:
+      url: 'https://github.com/oceanzhang01/flutter_vlc_player.git'
+      path: flutter_vlc_player_platform_interface
   meta: ^1.8.0
 
 dev_dependencies:
