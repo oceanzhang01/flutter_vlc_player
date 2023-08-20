@@ -197,7 +197,7 @@ final class FlutterVlcPlayer implements PlatformView {
 
                             case MediaPlayer.Event.Buffering:
                             case MediaPlayer.Event.TimeChanged:
-                                eventObject.put("event", "timeChanged");
+                                eventObject.put("event",event.type ==  MediaPlayer.Event.TimeChanged ? "timeChanged" : "buffering");
                                 eventObject.put("height", height);
                                 eventObject.put("width", width);
                                 eventObject.put("speed", mediaPlayer.getRate());

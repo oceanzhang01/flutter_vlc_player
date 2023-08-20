@@ -453,8 +453,8 @@ class VLCPlayerEventStreamHandler: NSObject, FlutterStreamHandler, VLCMediaPlaye
         
         let player = aNotification.object as? VLCMediaPlayer
         let media = player?.media
-        let height = player?.videoSize.height ?? 0
-        let width = player?.videoSize.width ?? 0
+        let height = Int(player?.videoSize.height ?? 0)
+        let width = Int(player?.videoSize.width ?? 0)
         let audioTracksCount = player?.numberOfAudioTracks ?? 0
         let activeAudioTrack = player?.currentAudioTrackIndex ?? 0
         let spuTracksCount = player?.numberOfSubtitlesTracks ?? 0
@@ -508,7 +508,7 @@ class VLCPlayerEventStreamHandler: NSObject, FlutterStreamHandler, VLCMediaPlaye
             
         case .buffering:
             mediaEventSink([
-                "event": "timeChanged",
+                "event": "buffering",
                 "height": height,
                 "width":  width,
                 "speed": speed,
@@ -568,8 +568,8 @@ class VLCPlayerEventStreamHandler: NSObject, FlutterStreamHandler, VLCMediaPlaye
         
         let player = aNotification.object as? VLCMediaPlayer
         //
-        let height = player?.videoSize.height ?? 0
-        let width = player?.videoSize.width ?? 0
+        let height = Int(player?.videoSize.height ?? 0)
+        let width = Int(player?.videoSize.width ?? 0)
         let speed = player?.rate ?? 1
         let duration = player?.media?.length.value ?? 0
         let audioTracksCount = player?.numberOfAudioTracks ?? 0

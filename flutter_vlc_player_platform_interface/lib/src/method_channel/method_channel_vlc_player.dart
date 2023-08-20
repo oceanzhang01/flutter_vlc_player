@@ -114,7 +114,7 @@ class MethodChannelVlcPlayer extends VlcPlayerPlatform {
   Stream<VlcMediaEvent> mediaEventsFor(int viewId) {
     return _mediaEventChannelFor(viewId).receiveBroadcastStream().map(
       (dynamic event) {
-        final Map<String, Object?> map = event as Map<String, Object?>;
+        final Map<Object, Object?> map = event.cast<String, Object?>();
         //
         switch (map['event']) {
           case 'opening':
@@ -156,9 +156,8 @@ class MethodChannelVlcPlayer extends VlcPlayerPlatform {
           case 'buffering':
           case 'timeChanged':
             const _defaultBufferPercent = 100.0;
-
             return VlcMediaEvent(
-              mediaEventType: VlcMediaEventType.timeChanged,
+              mediaEventType: map['event'] as String == 'timeChanged' ?  VlcMediaEventType.timeChanged : VlcMediaEventType.buffering,
               size: Size(
                 (map['width'] as int?)?.toDouble() ?? 0.0,
                 (map['height'] as int?)?.toDouble() ?? 0.0,
